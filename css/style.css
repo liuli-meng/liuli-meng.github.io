@@ -268,7 +268,7 @@ a:hover { color: var(--white); }
   font-size: 14px;
   flex: 1;
   display: -webkit-box;
-  -webkit-line-clamp: 2;
+  -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
@@ -279,6 +279,28 @@ a:hover { color: var(--white); }
 
 /* ===== 关于 ===== */
 .about-text { color: var(--slate); max-width: 700px; margin-bottom: 36px; font-size: 16px; }
+
+/* 最近在做 */
+.doing-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 14px;
+  max-width: 760px;
+  margin-bottom: 40px;
+}
+.doing-item {
+  display: flex;
+  gap: 14px;
+  background: var(--navy-light);
+  border: 1px solid var(--navy-lightest);
+  border-radius: var(--radius);
+  padding: 18px;
+  transition: transform 0.2s, border-color 0.2s;
+}
+.doing-item:hover { transform: translateY(-3px); border-color: var(--green); }
+.doing-num { color: var(--green); font-size: 14px; padding-top: 3px; }
+.doing-title { color: var(--slate-lightest); font-size: 15px; font-weight: 500; margin-bottom: 4px; }
+.doing-text { color: var(--slate); font-size: 13.5px; line-height: 1.6; }
 
 .skill-group-title { color: var(--slate-light); font-size: 14px; margin-bottom: 16px; }
 

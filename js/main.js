@@ -51,11 +51,14 @@ function renderRepos(list) {
   grid.innerHTML = '';
   list.forEach((r) => {
     const color = LANG_COLORS[r.lang] || '#8b949e';
+    const langBadge = r.lang
+      ? '<span class="card-lang"><span class="lang-dot" style="background:' + color + '"></span>' + esc(r.lang) + '</span>'
+      : '<span></span>';
     const card = document.createElement('article');
     card.className = 'card';
     card.innerHTML =
       '<div class="card-head">' +
-        '<span class="card-lang"><span class="lang-dot" style="background:' + color + '"></span>' + esc(r.lang) + '</span>' +
+        langBadge +
         '<span class="card-meta">' +
           '<span>' + STAR_ICON + esc(r.stars) + '</span>' +
           '<span>' + FORK_ICON + esc(r.forks) + '</span>' +
@@ -101,7 +104,7 @@ async function fetchGitHub() {
   setStats(u.public_repos, u.followers, totalStars, contrib);
   renderRepos(top.map((r) => ({
     name: r.name,
-    lang: r.language || '未知',
+    lang: r.language || '',
     desc: r.description || '（这个仓库没有写简介）',
     stars: r.stargazers_count,
     forks: r.forks_count,
