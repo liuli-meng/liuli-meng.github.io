@@ -89,9 +89,12 @@ async function fetchGitHub() {
 
   let contrib = '—';
   try {
-    const cRes = await fetch('https://github-contributions-api.jogruber.de/v4/user/' + user);
+    const cRes = await fetch('https://github-contributions-api.jogruber.de/v4/' + user);
     const c = await cRes.json();
-    const n = (c && c.total && c.total.lastYear) || (c && c.total);
+    // 接口返回 {"total": {"2026": 20}}，按年份取；个别旧格式 total 直接是数字
+    const t = c && c.total;
+    const y = String(new Date().getFullYear());
+    const n = typeof t === 'number' ? t : (t && typeof t[y] === 'number' ? t[y] : undefined);
     if (typeof n === 'number') contrib = n;
   } catch (e) { /* 拿不到就显示 — */ }
 
