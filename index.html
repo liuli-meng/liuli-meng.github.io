@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>琉璃 · 个人主页</title>
+<meta name="description" content="琉璃的个人主页：开源项目、技术栈与关于我。">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- 左侧社交栏（电脑端） -->
+<div class="side side-left">
+  <a href="https://github.com/你的用户名" target="_blank" rel="noopener" aria-label="GitHub">
+    <svg viewBox="0 0 16 16" width="18" height="18" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
+  </a>
+  <a href="https://space.bilibili.com/你的uid" target="_blank" rel="noopener" aria-label="Bilibili">
+    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13a7 7 0 0 1 14 0v4a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2z"/><path d="M7 6 5 3"/><path d="M17 6l2-3"/></svg>
+  </a>
+  <span class="side-line"></span>
+</div>
+
+<!-- 右侧邮箱栏（电脑端） -->
+<div class="side side-right">
+  <a class="mono" href="mailto:lcyxzl@gmail.com">lcyxzl@gmail.com</a>
+  <span class="side-line"></span>
+</div>
+
+<!-- 顶部导航 -->
+<header class="nav" id="nav">
+  <div class="nav-inner">
+    <a href="#top" class="nav-logo mono">琉璃<span class="logo-cursor">_</span></a>
+    <nav class="nav-links" id="navLinks">
+      <a href="#projects"><span class="mono">01.</span>开源项目</a>
+      <a href="#about"><span class="mono">02.</span>关于我</a>
+      <a href="#contact"><span class="mono">03.</span>联系</a>
+    </nav>
+    <button class="nav-toggle" id="navToggle" aria-label="打开菜单">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- 首页 -->
+  <section class="hero">
+    <div class="hero-inner">
+      <p class="hero-greet mono">你好，我是</p>
+      <h1 class="hero-name">琉璃</h1>
+      <p class="hero-role mono" id="typewriter"></p>
+      <p class="hero-desc">
+        大学生，活跃在各类比赛的赛场上。平时折腾爬虫、数据清洗和数据可视化，
+        比赛用的 PPT 和演示素材也自己包了，最近在 GitHub 上攒开源作品。
+      </p>
+      <div class="hero-actions">
+        <a class="btn btn-green" href="#projects">查看我的项目</a>
+        <a class="btn btn-ghost" href="#contact">联系我</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- GitHub 统计 -->
+  <section class="section" id="stats">
+    <div class="section-inner stats-grid">
+      <div class="stat-card">
+        <div class="stat-num mono" id="statRepos">—</div>
+        <div class="stat-label">公开仓库</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num mono" id="statStars">—</div>
+        <div class="stat-label">Stars</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num mono" id="statFollowers">—</div>
+        <div class="stat-label">关注者</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num mono" id="statContrib">—</div>
+        <div class="stat-label">贡献</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 开源项目 -->
+  <section class="section" id="projects">
+    <div class="section-inner">
+      <h2 class="section-title"><span class="title-num mono">01.</span>开源项目</h2>
+      <p class="section-desc">探索我创建的开源作品（填入 GitHub 用户名后自动同步）</p>
+      <div class="grid" id="repoGrid"><!-- 由 js/main.js 渲染 --></div>
+      <div class="grid-more">
+        <a class="btn btn-ghost" id="githubLink" href="https://github.com/你的用户名" target="_blank" rel="noopener">查看全部项目 ↗</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 关于我 -->
+  <section class="section" id="about">
+    <div class="section-inner">
+      <h2 class="section-title"><span class="title-num mono">02.</span>关于我</h2>
+      <p class="about-text">
+        你好，我是琉璃，一名热爱编程的大学生。我的日常：参加各类比赛（比赛用的 PPT、
+        演示素材也自己包了）；写爬虫和数据清洗脚本，把数据变成看得懂的图表；折腾 Android
+        工具（ADB）、Node 环境这些杂活；也用 AI 编程工具（Claude Code / Codex）给自己提效。
+        作品都放在 GitHub 上，欢迎交流。
+      </p>
+      <h3 class="skill-group-title mono">技术栈 / tech stack</h3>
+      <div class="skill-chips">
+        <span class="chip">Python</span>
+        <span class="chip">JavaScript / Node.js</span>
+        <span class="chip">爬虫与数据清洗</span>
+        <span class="chip">数据可视化</span>
+        <span class="chip">Git / GitHub</span>
+        <span class="chip">ADB · Android 工具</span>
+        <span class="chip">AI 编程工具</span>
+        <span class="chip">PPT 与演示设计</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 联系 -->
+  <section class="section" id="contact">
+    <div class="section-inner contact-box">
+      <h2 class="section-title"><span class="title-num mono">03.</span>联系我</h2>
+      <p class="contact-big">有什么想法想交流，或者对我的作品感兴趣？</p>
+      <a class="btn btn-green btn-lg" href="mailto:lcyxzl@gmail.com">lcyxzl@gmail.com</a>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <p class="mono">© <span id="year">2026</span> 琉璃 · 手写 HTML/CSS/JS · 设计灵感来自 <a href="https://github.com/bchiang7/v4" target="_blank" rel="noopener">bchiang7/v4</a></p>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>
