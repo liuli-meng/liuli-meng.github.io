@@ -31,6 +31,13 @@ a:hover { color: var(--white); }
 
 ::selection { background: rgba(100, 255, 218, 0.25); }
 
+/* 滚动条与键盘焦点态 */
+::-webkit-scrollbar { width: 10px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--navy-lightest); border-radius: 5px; }
+::-webkit-scrollbar-thumb:hover { background: var(--slate); }
+a:focus-visible, button:focus-visible { outline: 2px solid var(--green); outline-offset: 3px; border-radius: 4px; }
+
 /* ===== 左右侧栏（电脑端）===== */
 .side {
   position: fixed;
@@ -82,7 +89,7 @@ a:hover { color: var(--white); }
 .nav-links { display: flex; gap: 28px; }
 .nav-links a { color: var(--slate-lightest); font-size: 14px; }
 .nav-links a span { color: var(--green); margin-right: 4px; font-size: 13px; }
-.nav-links a:hover { color: var(--green); }
+.nav-links a:hover, .nav-links a.active { color: var(--green); }
 
 .nav-toggle {
   display: none;
@@ -101,6 +108,7 @@ a:hover { color: var(--white); }
 
 /* ===== Hero ===== */
 .hero {
+  position: relative;
   min-height: 100vh;
   display: flex;
   align-items: center;
@@ -140,6 +148,19 @@ a:hover { color: var(--white); }
 }
 
 .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; }
+
+/* 首屏向下引导箭头 */
+.hero-scroll {
+  position: absolute;
+  left: 50%;
+  bottom: 26px;
+  color: var(--green);
+  animation: bounce 2.2s ease-in-out infinite;
+}
+@keyframes bounce {
+  0%, 100% { transform: translate(-50%, 0); }
+  50% { transform: translate(-50%, 8px); }
+}
 
 .btn {
   display: inline-block;
@@ -338,6 +359,36 @@ a:hover { color: var(--white); }
 /* ===== 滚动入场 ===== */
 .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
 .reveal.visible { opacity: 1; transform: none; }
+
+/* 区块显示后，卡片错落浮现 */
+.section.visible .stat-card,
+.section.visible .card,
+.section.visible .doing-item { animation: fadeUp 0.5s ease backwards; }
+.section.visible .stat-card:nth-child(2), .section.visible .doing-item:nth-child(2) { animation-delay: 0.08s; }
+.section.visible .stat-card:nth-child(3), .section.visible .doing-item:nth-child(3) { animation-delay: 0.16s; }
+.section.visible .stat-card:nth-child(4), .section.visible .doing-item:nth-child(4) { animation-delay: 0.24s; }
+.section.visible .card:nth-child(2) { animation-delay: 0.06s; }
+.section.visible .card:nth-child(3) { animation-delay: 0.12s; }
+.section.visible .card:nth-child(4) { animation-delay: 0.18s; }
+.section.visible .card:nth-child(5) { animation-delay: 0.24s; }
+.section.visible .card:nth-child(6) { animation-delay: 0.3s; }
+.section.visible .card:nth-child(7) { animation-delay: 0.36s; }
+.section.visible .card:nth-child(8) { animation-delay: 0.42s; }
+.section.visible .card:nth-child(9) { animation-delay: 0.48s; }
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+}
+
+/* 尊重系统"减少动态效果"设置 */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  .reveal { opacity: 1; transform: none; }
+}
 
 /* ===== 移动端 ===== */
 @media (max-width: 768px) {

@@ -134,6 +134,11 @@ if (CONFIG.githubUser) {
 function typewriter() {
   const el = document.getElementById('typewriter');
   if (!el || !CONFIG.roles.length) return;
+  // 系统开了"减少动态效果"就直接显示完整标签，不打字
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    el.textContent = CONFIG.roles[0];
+    return;
+  }
   let roleIdx = 0, charIdx = 0, deleting = false;
 
   function tick() {
@@ -194,5 +199,36 @@ document.querySelectorAll('.section').forEach((el) => {
   el.classList.add('reveal');
   observer.observe(el);
 });
+
+// 导航高亮：滚动到哪个区块，对应菜单项就亮起来
+const navAnchors = [...document.querySelectorAll('.nav-links a')];
+const spy = new IntersectionObserver(
+  (entries) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) return;
+      const id = entry.target.id;
+      navAnchors.forEach((a) =>
+        a.classList.toggle('active', a.getAttribute('href') === '#' + id)
+      );
+    });
+  },
+  { rootMargin: '-40% 0px -55% 0px' }
+);
+['projects', 'about', 'contact'].forEach((id) => {
+  const el = document.getElementById(id);
+  if (el) spy.observe(el);
+});
+// 回到首屏时取消高亮
+const heroEl = document.querySelector('.hero');
+if (heroEl) {
+  const heroSpy = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        navAnchors.forEach((a) => a.classList.remove('active'));
+      }
+    });
+  }, { rootMargin: '-40% 0px -55% 0px' });
+  heroSpy.observe(heroEl);
+}
 
 document.getElementById('year').textContent = new Date().getFullYear();
