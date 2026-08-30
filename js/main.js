@@ -99,6 +99,8 @@ async function fetchGitHub() {
     const y = String(new Date().getFullYear());
     const n = typeof t === 'number' ? t : (t && typeof t[y] === 'number' ? t[y] : undefined);
     if (typeof n === 'number') contrib = n;
+    // 同一份数据顺便画贡献热力图
+    if (c && Array.isArray(c.contributions)) renderHeatmap(c.contributions);
   } catch (e) { /* 拿不到就显示 — */ }
 
   setStats(u.public_repos, u.followers, totalStars, contrib);
@@ -116,6 +118,22 @@ async function fetchGitHub() {
 function fallback(stats, repos) {
   setStats(stats.repos, stats.followers, stats.stars, stats.contrib);
   renderRepos(repos);
+}
+
+// GitHub 贡献热力图：按周分列（第一列按星期对齐留空），接口拿不到就不显示
+function renderHeatmap(days) {
+  const wrap = document.getElementById('heatmap');
+  const box = document.getElementById('heatmapBox');
+  if (!wrap || !box || !days.length) return;
+  const pad = new Date(days[0].date + 'T00:00:00').getDay();
+  let html = '';
+  for (let i = 0; i < pad; i++) html += '<span class="hm-cell"></span>';
+  days.forEach((d) => {
+    const lv = Math.min(4, Math.max(0, d.level | 0));
+    html += '<span class="hm-cell l' + lv + '" title="' + esc(d.date) + ' · ' + esc(d.count) + ' 次贡献"></span>';
+  });
+  wrap.innerHTML = html;
+  box.hidden = false;
 }
 
 // 链接兜底
@@ -214,7 +232,7 @@ const spy = new IntersectionObserver(
   },
   { rootMargin: '-40% 0px -55% 0px' }
 );
-['projects', 'about', 'contact'].forEach((id) => {
+['projects', 'about', 'blog', 'contact'].forEach((id) => {
   const el = document.getElementById(id);
   if (el) spy.observe(el);
 });

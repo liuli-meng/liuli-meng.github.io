@@ -36,7 +36,8 @@
     <nav class="nav-links" id="navLinks">
       <a href="#projects"><span class="mono">01.</span>开源项目</a>
       <a href="#about"><span class="mono">02.</span>关于我</a>
-      <a href="#contact"><span class="mono">03.</span>联系</a>
+      <a href="#blog"><span class="mono">03.</span>博客</a>
+      <a href="#contact"><span class="mono">04.</span>联系</a>
     </nav>
     <button class="nav-toggle" id="navToggle" aria-label="打开菜单">
       <span></span><span></span><span></span>
@@ -49,17 +50,32 @@
   <!-- 首页 -->
   <section class="hero">
     <div class="hero-inner">
-      <p class="hero-greet mono">你好，我是</p>
-      <h1 class="hero-name">琉璃</h1>
-      <p class="hero-role mono" id="typewriter"></p>
-      <p class="hero-desc">
-        活跃在各类比赛的赛场上，也喜欢和爬虫、数据打交道：抓取、清洗、做成看得懂的图表。
-        最近正把平时写的工具陆续搬上 GitHub。
-      </p>
-      <div class="hero-actions">
-        <a class="btn btn-green" href="#projects">查看我的项目</a>
-        <a class="btn btn-ghost" href="#contact">联系我</a>
+      <div class="hero-text">
+        <p class="hero-greet mono">你好，我是</p>
+        <h1 class="hero-name">琉璃</h1>
+        <p class="hero-role mono" id="typewriter"></p>
+        <p class="hero-desc">
+          活跃在各类比赛的赛场上，也喜欢和爬虫、数据打交道：抓取、清洗、做成看得懂的图表。
+          最近正把平时写的工具陆续搬上 GitHub。
+        </p>
+        <div class="hero-actions">
+          <a class="btn btn-green" href="#projects">查看我的项目</a>
+          <a class="btn btn-ghost" href="#blog">看看我的博客</a>
+        </div>
       </div>
+      <div class="hero-code" aria-hidden="true">
+      <div class="code-bar"><span></span><span></span><span></span><em>liuli@github: ~</em></div>
+      <pre class="code-body mono"><span class="c-prompt">$</span> whoami
+琉璃 — 大学生 · 比赛选手
+<span class="c-prompt">$</span> cat interests.json
+{
+  "<span class="c-key">爬虫</span>": "抓取 · 清洗 · 入库",
+  "<span class="c-key">可视化</span>": "把数据画出来",
+  "<span class="c-key">比赛</span>": "各类赛场常客",
+  "<span class="c-key">开源</span>": "写点小工具自用"
+}
+<span class="c-prompt">$</span> git log --oneline -1
+<span class="c-key">fdaef72</span> 把想法做成能用的东西_</pre>
     </div>
     <a class="hero-scroll" href="#stats" aria-label="向下滚动查看更多">
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14"/><path d="m19 12-7 7-7-7"/></svg>
@@ -139,6 +155,11 @@
           </div>
         </div>
       </div>
+      <div class="heatmap-box" id="heatmapBox" hidden>
+        <h3 class="skill-group-title mono">过去一年 / contributions</h3>
+        <div class="heatmap" id="heatmap" aria-label="GitHub 贡献热力图"></div>
+        <div class="heatmap-legend mono">少 <span class="hm-cell"></span><span class="hm-cell l1"></span><span class="hm-cell l2"></span><span class="hm-cell l3"></span><span class="hm-cell l4"></span> 多</div>
+      </div>
       <h3 class="skill-group-title mono">技术栈 / tech stack</h3>
       <div class="skill-chips">
         <span class="chip">Python</span>
@@ -152,10 +173,22 @@
     </div>
   </section>
 
+  <!-- 博客 -->
+  <section class="section" id="blog">
+    <div class="section-inner">
+      <h2 class="section-title"><span class="title-num mono">03.</span>博客</h2>
+      <p class="section-desc">记录折腾过程中的笔记与思考</p>
+      <div class="post-list" id="postList" data-limit="3"></div>
+      <div class="grid-more">
+        <a class="btn btn-ghost" href="blog.html">全部文章 →</a>
+      </div>
+    </div>
+  </section>
+
   <!-- 联系 -->
   <section class="section" id="contact">
     <div class="section-inner contact-box">
-      <h2 class="section-title"><span class="title-num mono">03.</span>联系我</h2>
+      <h2 class="section-title"><span class="title-num mono">04.</span>联系我</h2>
       <p class="contact-big">有想法想聊聊，或者对我的项目感兴趣？</p>
       <a class="btn btn-green btn-lg" href="mailto:lcyxzl@gmail.com">lcyxzl@gmail.com</a>
     </div>
@@ -167,6 +200,8 @@
   <p class="mono">© <span id="year">2026</span> 琉璃 · 手写 HTML/CSS/JS</p>
 </footer>
 
+<script src="js/posts.js"></script>
+<script src="js/blog.js"></script>
 <script src="js/main.js"></script>
 </body>
 </html>

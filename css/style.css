@@ -114,8 +114,51 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--green); outline
   align-items: center;
   padding: 120px 24px 80px;
 }
+/* 首屏右上角的淡淡绿色光晕 */
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(640px 420px at 74% 28%, rgba(100, 255, 218, 0.05), transparent 70%);
+  pointer-events: none;
+}
 
-.hero-inner { max-width: 1080px; margin: 0 auto; width: 100%; }
+.hero-inner { max-width: 1080px; margin: 0 auto; width: 100%; position: relative; }
+
+/* 宽屏时首屏文字 + 代码窗口双栏 */
+@media (min-width: 1024px) {
+  .hero-inner { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 56px; align-items: center; }
+}
+
+/* 代码窗口装饰（手机上隐藏） */
+.hero-code { display: none; }
+@media (min-width: 1024px) {
+  .hero-code {
+    display: block;
+    background: var(--navy-light);
+    border: 1px solid var(--navy-lightest);
+    border-radius: var(--radius);
+    box-shadow: 0 20px 50px rgba(2, 12, 27, 0.5);
+    overflow: hidden;
+    margin-right: 60px; /* 避开右侧竖排邮箱栏 */
+  }
+}
+.code-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--navy-lightest);
+  background: rgba(2, 12, 27, 0.4);
+}
+.code-bar span { width: 11px; height: 11px; border-radius: 50%; }
+.code-bar span:nth-child(1) { background: #ff5f56; }
+.code-bar span:nth-child(2) { background: #ffbd2e; }
+.code-bar span:nth-child(3) { background: #27c93f; }
+.code-bar em { margin-left: auto; font-style: normal; color: var(--slate); font-size: 12px; }
+.code-body { padding: 20px 22px; font-size: 13.5px; line-height: 1.95; color: var(--slate-light); white-space: pre-wrap; }
+.code-body .c-prompt { color: var(--green); }
+.code-body .c-key { color: var(--slate-lightest); }
 
 .hero-greet { color: var(--green); font-size: 16px; margin-bottom: 18px; }
 
@@ -297,6 +340,104 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--green); outline
 .card-link { font-size: 14px; }
 
 .grid-more { text-align: center; margin-top: 44px; }
+
+/* ===== 博客列表 ===== */
+.post-list { display: flex; flex-direction: column; max-width: 800px; }
+.post-item {
+  padding: 26px 18px;
+  border-bottom: 1px solid var(--navy-lightest);
+  border-radius: 6px;
+  transition: background 0.2s;
+}
+.post-item:first-child { border-top: 1px solid var(--navy-lightest); }
+.post-item:hover { background: rgba(17, 34, 64, 0.55); }
+.post-meta {
+  display: flex;
+  gap: 14px;
+  color: var(--slate);
+  font-size: 13px;
+  margin-bottom: 8px;
+}
+.post-title { font-size: 20px; font-weight: 500; margin-bottom: 8px; }
+.post-title a { color: var(--slate-lightest); }
+.post-title a:hover { color: var(--green); }
+.post-excerpt { color: var(--slate); font-size: 14.5px; line-height: 1.8; }
+.more { font-family: var(--font-mono); font-size: 14px; white-space: nowrap; }
+
+/* ===== 文章阅读页 ===== */
+.post-wrap { max-width: 820px; margin: 0 auto; padding: 140px 24px 100px; }
+.post-h1 {
+  font-size: clamp(28px, 5vw, 40px);
+  color: var(--white);
+  font-weight: 500;
+  line-height: 1.4;
+  margin: 12px 0 30px;
+}
+.post-body { color: var(--slate-light); font-size: 16px; }
+.post-body h2 {
+  color: var(--slate-lightest);
+  font-size: 22px;
+  font-weight: 500;
+  margin: 42px 0 14px;
+}
+.post-body h3 { color: var(--slate-lightest); font-size: 18px; font-weight: 500; margin: 30px 0 12px; }
+.post-body p { margin-bottom: 16px; line-height: 1.95; }
+.post-body ul { margin: 0 0 16px 4px; padding-left: 20px; }
+.post-body li { margin-bottom: 8px; line-height: 1.85; }
+.post-body a { color: var(--green); }
+.post-body a:hover { color: var(--white); }
+.post-body code {
+  background: rgba(100, 255, 218, 0.08);
+  color: var(--green);
+  padding: 2px 7px;
+  border-radius: 5px;
+  font-family: var(--font-mono);
+  font-size: 14px;
+}
+.post-body pre {
+  background: #020c1b;
+  border: 1px solid var(--navy-lightest);
+  border-radius: var(--radius);
+  padding: 18px 20px;
+  overflow-x: auto;
+  margin-bottom: 20px;
+}
+.post-body pre code { background: none; color: var(--slate-light); padding: 0; font-size: 14px; line-height: 1.8; }
+.post-body blockquote {
+  border-left: 3px solid var(--green);
+  background: rgba(17, 34, 64, 0.5);
+  padding: 12px 20px;
+  color: var(--slate);
+  border-radius: 0 6px 6px 0;
+  margin: 0 0 20px;
+}
+.post-back { margin-top: 48px; }
+
+/* ===== 贡献热力图 ===== */
+.heatmap-box { max-width: 760px; margin-bottom: 40px; }
+.heatmap {
+  display: grid;
+  grid-template-rows: repeat(7, 11px);
+  grid-auto-flow: column;
+  grid-auto-columns: 11px;
+  gap: 3px;
+  overflow-x: auto;
+  padding-bottom: 8px;
+}
+.hm-cell { width: 11px; height: 11px; border-radius: 2.5px; background: rgba(100, 255, 218, 0.07); flex-shrink: 0; }
+.hm-cell.l1 { background: #0e4429; }
+.hm-cell.l2 { background: #006d32; }
+.hm-cell.l3 { background: #26a641; }
+.hm-cell.l4 { background: #39d353; }
+.heatmap-legend {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 4px;
+  color: var(--slate);
+  font-size: 12px;
+  margin-top: 10px;
+}
 
 /* ===== 关于 ===== */
 .about-text { color: var(--slate); max-width: 700px; margin-bottom: 36px; font-size: 16px; }

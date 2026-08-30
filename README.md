@@ -35,7 +35,18 @@ const CONFIG = {
 
 双击 `index.html`。填了 `githubUser` 的话数据拉取需要联网。
 
-## 三、免费上线（三选一）
+## 四、写博客文章
+
+文章数据都存在 `js/posts.js` 里，新增一篇 = 复制一段 `{ ... }` 改内容：
+
+- `slug`：文章的网址名，如 `'my-first-post'`，别和已有的重复
+- `title` / `date` / `tags` / `excerpt`：标题、日期、标签、摘要
+- `content`：正文，是一段 HTML，能用 `h2 / h3 / p / ul / li / code / pre / blockquote / a`
+
+首页自动显示最新 3 篇，[blog.html](blog.html) 显示全部，点开进 `post.html?slug=文章名` 阅读。
+现在放的是 3 篇示例文章（对应 GitHub 上的真实项目），替换成你自己写的即可。
+
+## 五、免费上线（三选一）
 
 **方式 A：GitHub Pages（推荐）**
 1. 把 `index.html`、`css/`、`js/` 传到一个 GitHub 仓库
