@@ -413,6 +413,99 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--green); outline
 }
 .post-back { margin-top: 48px; }
 
+/* 文章页宽屏：正文 + 右侧目录双栏 */
+.post-layout { max-width: 1160px; margin: 0 auto; }
+.toc { display: none; }
+@media (min-width: 1200px) {
+  .post-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 230px;
+    gap: 60px;
+    align-items: start;
+    padding: 0 24px;
+  }
+  .post-wrap { max-width: none; padding: 140px 0 100px; }
+  .toc { display: block; position: sticky; top: 108px; }
+}
+.toc .skill-group-title { margin-bottom: 10px; }
+.toc a {
+  display: block;
+  color: var(--slate);
+  font-size: 13px;
+  line-height: 1.5;
+  padding: 5px 0 5px 12px;
+  border-left: 1px solid var(--navy-lightest);
+  transition: color 0.2s, border-color 0.2s;
+}
+.toc a:hover, .toc a.active { color: var(--green); border-left-color: var(--green); }
+
+/* 上一篇 / 下一篇 */
+.post-nav {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin-top: 52px;
+}
+.pn {
+  border: 1px solid var(--navy-lightest);
+  border-radius: var(--radius);
+  padding: 16px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  transition: border-color 0.2s, transform 0.2s;
+}
+.pn:hover { border-color: var(--green); transform: translateY(-3px); }
+.pn .pn-label { color: var(--slate); font-size: 12px; }
+.pn strong { color: var(--slate-lightest); font-size: 14.5px; font-weight: 500; line-height: 1.6; }
+.pn.next { text-align: right; }
+@media (max-width: 640px) {
+  .post-nav { grid-template-columns: 1fr; }
+  .pn.next { text-align: left; }
+}
+
+/* 代码块复制按钮 */
+.code-wrap { position: relative; }
+.copy-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: var(--navy-light);
+  color: var(--slate-light);
+  border: 1px solid var(--navy-lightest);
+  border-radius: 6px;
+  font-size: 12px;
+  padding: 4px 10px;
+  cursor: pointer;
+  transition: color 0.2s, border-color 0.2s;
+}
+.copy-btn:hover { color: var(--green); border-color: var(--green); }
+
+/* 返回顶部（桌面端避开右侧邮箱栏） */
+.back-top {
+  position: fixed;
+  right: 96px;
+  bottom: 28px;
+  z-index: 95;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: var(--navy-light);
+  color: var(--green);
+  border: 1px solid var(--navy-lightest);
+  cursor: pointer;
+  font-size: 16px;
+  opacity: 0;
+  transform: translateY(10px);
+  pointer-events: none;
+  transition: opacity 0.25s, transform 0.25s, border-color 0.2s;
+}
+.back-top.show { opacity: 1; transform: none; pointer-events: auto; }
+.back-top:hover { border-color: var(--green); }
+@media (max-width: 768px) {
+  .back-top { right: 20px; bottom: 20px; }
+}
+
 /* ===== 贡献热力图 ===== */
 .heatmap-box { max-width: 760px; margin-bottom: 40px; }
 .heatmap {
