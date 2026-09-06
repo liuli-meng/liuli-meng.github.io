@@ -4,8 +4,13 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>文章 · 琉璃</title>
+<meta name="description" content="琉璃的博客文章：折腾过程中的笔记与思考。">
 <meta name="theme-color" content="#0a192f">
+<meta name="color-scheme" content="dark">
 <meta property="og:type" content="article">
+<meta property="og:url" content="https://liuli-meng.github.io/">
+<meta property="og:image" content="https://liuli-meng.github.io/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
 <meta property="og:title" content="">
 <meta property="og:description" content="">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230a192f'/%3E%3Ctext x='32' y='45' font-family='monospace' font-size='36' font-weight='bold' fill='%2364ffda' text-anchor='middle'%3E%3E_%3C/text%3E%3C/svg%3E">
@@ -13,13 +18,16 @@
 </head>
 <body>
 
-<header class="nav">
+<header class="nav" id="nav">
   <div class="nav-inner">
-    <a href="/" class="nav-logo mono">琉璃<span class="logo-cursor">_</span></a>
-    <nav class="nav-links">
-      <a href="/">主页</a>
+    <a href="index.html" class="nav-logo mono">琉璃<span class="logo-cursor">_</span></a>
+    <nav class="nav-links" id="navLinks">
+      <a href="index.html">主页</a>
       <a href="blog.html">博客</a>
     </nav>
+    <button class="nav-toggle" id="navToggle" aria-label="打开菜单" aria-controls="navLinks" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
   </div>
 </header>
 
@@ -30,6 +38,7 @@
       <h1 class="post-h1" id="postTitle"></h1>
       <div class="post-body" id="postBody"></div>
       <nav class="post-nav" id="postNav" aria-label="上一篇下一篇"></nav>
+      <section class="comments" id="comments" aria-label="评论区"></section>
       <p class="post-back"><a href="blog.html">← 返回文章列表</a></p>
     </article>
     <aside class="toc" id="toc" hidden>
@@ -40,6 +49,10 @@
 </main>
 
 <button class="back-top mono" id="backTop" type="button" aria-label="返回顶部" hidden>↑</button>
+
+<footer class="footer">
+  <p class="mono">© <span id="year">2026</span> 琉璃 · 手写 HTML/CSS/JS</p>
+</footer>
 
 <script src="js/posts.js"></script>
 <script src="js/blog.js"></script>

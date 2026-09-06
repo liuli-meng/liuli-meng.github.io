@@ -35,26 +35,38 @@ const CONFIG = {
 
 双击 `index.html`。填了 `githubUser` 的话数据拉取需要联网。
 
-## 四、写博客文章
+## 三、写博客文章
 
 文章数据都存在 `js/posts.js` 里，新增一篇 = 复制一段 `{ ... }` 改内容：
 
 - `slug`：文章的网址名，如 `'my-first-post'`，别和已有的重复
 - `title` / `date` / `tags` / `excerpt`：标题、日期、标签、摘要
 - `content`：正文，是一段 HTML，能用 `h2 / h3 / p / ul / li / code / pre / blockquote / a`
+- **同时更新两处**：`rss.xml` 里照格式加一个 `<item>`（订阅源是静态文件，不会自动生成）；
+  `sitemap.xml` 里加一条 `<url>`（顺手改 lastmod，不改也不影响收录）
 
 首页自动显示最新 3 篇，[blog.html](blog.html) 显示全部，点开进 `post.html?slug=文章名` 阅读。
 现在放的是 3 篇示例文章（对应 GitHub 上的真实项目），替换成你自己写的即可。
 
-## 五、免费上线（三选一）
+## 五、评论与分享（已配置，差一步手动安装）
+
+**文章评论（giscus）**：数据存在本仓库的 GitHub Discussions 里，无广告、无第三方数据库。
+仓库已开启 Discussions，`js/blog.js` 里的 `COMMENTS` 配置也已填好 ID。
+**唯一要手动做的一步**：打开 <https://github.com/apps/giscus> → Install → 只勾选
+`liuli-meng.github.io` 这个仓库。装完评论立即可用；不想要评论就把 `COMMENTS.enabled` 改为 `false`。
+
+**社交分享卡片**：分享到微信 / QQ / Twitter 会显示根目录的 `og-image.png`（1200×630）。
+想换图直接覆盖它，或改名字/配色后运行 `python tools/make_og_image.py` 重新生成。
+
+## 四、免费上线（三选一）
 
 **方式 A：GitHub Pages（推荐）**
-1. 把 `index.html`、`css/`、`js/` 传到一个 GitHub 仓库
+1. 把整个目录（`index.html`、`blog.html`、`post.html`、`404.html`、`css/`、`js/`）传到一个 GitHub 仓库
 2. 仓库 Settings → Pages → Source 选分支
 3. 网址变成 `https://你的用户名.github.io/仓库名/`
 
 **方式 B：腾讯云 COS（国内访问快）**
-1. 创建存储桶，上传这三个文件
+1. 创建存储桶，上传整个目录
 2. 存储桶 → 概览 → 打开「静态网站」开关，复制访问域名
 
 **方式 C：Vercel**

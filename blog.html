@@ -6,19 +6,29 @@
 <title>博客 · 琉璃</title>
 <meta name="description" content="琉璃的博客：折腾过程中的笔记与思考。">
 <meta name="theme-color" content="#0a192f">
+<meta name="color-scheme" content="dark">
+<meta property="og:title" content="博客 · 琉璃">
+<meta property="og:description" content="琉璃的博客：折腾过程中的笔记与思考。">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://liuli-meng.github.io/blog.html">
+<meta property="og:image" content="https://liuli-meng.github.io/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230a192f'/%3E%3Ctext x='32' y='45' font-family='monospace' font-size='36' font-weight='bold' fill='%2364ffda' text-anchor='middle'%3E%3E_%3C/text%3E%3C/svg%3E">
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
-<header class="nav">
+<header class="nav" id="nav">
   <div class="nav-inner">
-    <a href="/" class="nav-logo mono">琉璃<span class="logo-cursor">_</span></a>
-    <nav class="nav-links">
-      <a href="/">主页</a>
-      <a href="/#projects">项目</a>
-      <a href="/#contact">联系</a>
+    <a href="index.html" class="nav-logo mono">琉璃<span class="logo-cursor">_</span></a>
+    <nav class="nav-links" id="navLinks">
+      <a href="index.html">主页</a>
+      <a href="index.html#projects">项目</a>
+      <a href="index.html#contact">联系</a>
     </nav>
+    <button class="nav-toggle" id="navToggle" aria-label="打开菜单" aria-controls="navLinks" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
   </div>
 </header>
 
@@ -38,12 +48,5 @@
 
 <script src="js/posts.js"></script>
 <script src="js/blog.js"></script>
-<script>
-  // 列表渲染由 blog.js 自动完成，这里补一个文章计数
-  document.addEventListener('DOMContentLoaded', () => {
-    document.getElementById('postCount').textContent = (window.POSTS || []).length;
-    document.getElementById('year').textContent = new Date().getFullYear();
-  });
-</script>
 </body>
 </html>

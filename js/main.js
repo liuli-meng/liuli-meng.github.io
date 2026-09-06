@@ -186,20 +186,7 @@ function typewriter() {
 }
 typewriter();
 
-// ===== 页面交互 =====
-const nav = document.getElementById('nav');
-window.addEventListener('scroll', () => {
-  nav.classList.toggle('scrolled', window.scrollY > 30);
-}, { passive: true });
-
-const toggle = document.getElementById('navToggle');
-const links = document.getElementById('navLinks');
-if (toggle && links) {
-  toggle.addEventListener('click', () => links.classList.toggle('open'));
-  links.querySelectorAll('a').forEach((a) =>
-    a.addEventListener('click', () => links.classList.remove('open'))
-  );
-}
+// ===== 页面交互（导航滚动阴影/移动端菜单在全站共用的 js/blog.js 里）=====
 
 const observer = new IntersectionObserver(
   (entries) => {
@@ -248,5 +235,3 @@ if (heroEl) {
   }, { rootMargin: '-40% 0px -55% 0px' });
   heroSpy.observe(heroEl);
 }
-
-document.getElementById('year').textContent = new Date().getFullYear();

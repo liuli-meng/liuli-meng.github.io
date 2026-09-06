@@ -14,6 +14,46 @@ function postHref(slug) {
   return 'post.html?slug=' + encodeURIComponent(slug);
 }
 
+// ===== 文章评论（giscus，数据存在 GitHub Discussions 里）=====
+// 仓库已开启 Discussions 并建好配置；唯一手动步骤：在 https://github.com/apps/giscus
+// 安装 App 并授权 liuli-meng.github.io 仓库，评论才会真正可用。
+// 不想要评论就把 enabled 改为 false。
+const COMMENTS = {
+  enabled: true,
+  repo: 'liuli-meng/liuli-meng.github.io',
+  repoId: 'R_kgDOUIApBw',
+  category: 'General',
+  categoryId: 'DIC_kwDOUIApB84DE_Jt',
+};
+
+function setupComments() {
+  const box = document.getElementById('comments');
+  if (!box || box.hasChildNodes()) return;
+  const s = document.createElement('script');
+  s.src = 'https://giscus.app/client.js';
+  s.async = true;
+  s.crossOrigin = 'anonymous';
+  s.setAttribute('data-repo', COMMENTS.repo);
+  s.setAttribute('data-repo-id', COMMENTS.repoId);
+  s.setAttribute('data-category', COMMENTS.category);
+  s.setAttribute('data-category-id', COMMENTS.categoryId);
+  s.setAttribute('data-mapping', 'pathname');
+  s.setAttribute('data-strict', '0');
+  s.setAttribute('data-reactions-enabled', '1');
+  s.setAttribute('data-emit-metadata', '0');
+  s.setAttribute('data-input-position', 'top');
+  s.setAttribute('data-theme', 'transparent_dark');
+  s.setAttribute('data-lang', 'zh-CN');
+  // 先隐藏，等 giscus 真正加载好再显示：没装 App / 网络不通时不留一块空白
+  box.hidden = true;
+  window.addEventListener('message', function onGiscus(e) {
+    if (e.origin !== 'https://giscus.app') return;
+    box.hidden = false;
+    window.removeEventListener('message', onGiscus);
+  });
+  box.appendChild(s);
+}
+
 // 渲染文章列表（limit 传数字则只显示前几篇，首页用）
 function renderPostList(el, limit) {
   if (!el) return;
@@ -130,6 +170,11 @@ function renderPostPage() {
   const ogDesc = document.querySelector('meta[property="og:description"]');
   if (ogTitle) ogTitle.setAttribute('content', post.title);
   if (ogDesc) ogDesc.setAttribute('content', post.excerpt);
+  const ogUrl = document.querySelector('meta[property="og:url"]');
+  if (ogUrl) ogUrl.setAttribute('content', 'https://liuli-meng.github.io/post.html?slug=' + encodeURIComponent(post.slug));
+
+  // 评论区（giscus）
+  if (COMMENTS.enabled) setupComments();
 }
 
 // 目录高亮：滚动到哪一节，目录里对应项亮起
@@ -161,8 +206,36 @@ function setupBackTop() {
   btn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 }
 
+// ===== 全站导航：滚动阴影 + 移动端菜单（三个页面共用，主页的区块高亮仍由 main.js 负责）=====
+const siteNav = document.getElementById('nav');
+if (siteNav) {
+  window.addEventListener('scroll', () => {
+    siteNav.classList.toggle('scrolled', window.scrollY > 30);
+  }, { passive: true });
+}
+
+const navToggle = document.getElementById('navToggle');
+const navLinks = document.getElementById('navLinks');
+if (navToggle && navLinks) {
+  navToggle.addEventListener('click', () => {
+    const open = navLinks.classList.toggle('open');
+    navToggle.setAttribute('aria-expanded', String(open));
+  });
+  navLinks.querySelectorAll('a').forEach((a) =>
+    a.addEventListener('click', () => {
+      navLinks.classList.remove('open');
+      navToggle.setAttribute('aria-expanded', 'false');
+    })
+  );
+}
+
 // 按当前页面自动分派：有 postBody 就是阅读页，否则渲染列表（容器可带 data-limit 限制篇数）
 document.addEventListener('DOMContentLoaded', () => {
+  const year = document.getElementById('year');
+  if (year) year.textContent = new Date().getFullYear();
+  const count = document.getElementById('postCount');
+  if (count) count.textContent = (window.POSTS || []).length;
+
   setupBackTop();
   if (document.getElementById('postBody')) {
     renderPostPage();

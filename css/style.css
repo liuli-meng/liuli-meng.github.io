@@ -14,7 +14,7 @@
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; scroll-padding-top: 80px; }
 
 body {
   font-family: "PingFang SC", "Microsoft YaHei", "Helvetica Neue", Arial, sans-serif;
@@ -412,6 +412,9 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--green); outline
   margin: 0 0 20px;
 }
 .post-back { margin-top: 48px; }
+
+/* 文章评论区（giscus） */
+.comments { margin-top: 64px; }
 
 /* 文章页宽屏：正文 + 右侧目录双栏 */
 .post-layout { max-width: 1160px; margin: 0 auto; }

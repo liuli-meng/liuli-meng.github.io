@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  RSS 订阅源。新增文章时除了 js/posts.js，也要在这里照格式加一个 <item>。
+  guid / link 里的 slug 要和 posts.js 里的 slug 一致。
+-->
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>琉璃的博客</title>
+    <link>https://liuli-meng.github.io/blog.html</link>
+    <description>折腾过程中的笔记与思考：爬虫、数据可视化、小工具与比赛。</description>
+    <language>zh-CN</language>
+    <atom:link href="https://liuli-meng.github.io/rss.xml" rel="self" type="application/rss+xml"/>
+
+    <item>
+      <title>从零写一个 KPL 俱乐部经营小游戏</title>
+      <link>https://liuli-meng.github.io/post.html?slug=kpl-manager-dev-log</link>
+      <guid isPermaLink="true">https://liuli-meng.github.io/post.html?slug=kpl-manager-dev-log</guid>
+      <pubDate>Thu, 20 Aug 2026 00:00:00 +0800</pubDate>
+      <category>HTML</category>
+      <category>游戏开发</category>
+      <description>想玩电竞经理但嫌手机游戏太肝？干脆自己写一个：转会谈判、青训培养、官方两段式 BP、联赛征程，全部塞进一个单文件 HTML，双击就能玩。</description>
+    </item>
+
+    <item>
+      <title>用 DouZero 搭一个自己的斗地主 AI</title>
+      <link>https://liuli-meng.github.io/post.html?slug=doudizhu-ai-douzero</link>
+      <guid isPermaLink="true">https://liuli-meng.github.io/post.html?slug=doudizhu-ai-douzero</guid>
+      <pubDate>Wed, 15 Jul 2026 00:00:00 +0800</pubDate>
+      <category>Python</category>
+      <category>强化学习</category>
+      <description>基于快手开源的 DouZero，从部署到跑起一副像模像样的斗地主 AI，记录一下过程中值得记的点：环境、出牌编码、以及怎么让它接入自己的界面。</description>
+    </item>
+
+    <item>
+      <title>C 盘又红了？我写了个自动整理工具</title>
+      <link>https://liuli-meng.github.io/post.html?slug=fileorganizer-powershell</link>
+      <guid isPermaLink="true">https://liuli-meng.github.io/post.html?slug=fileorganizer-powershell</guid>
+      <pubDate>Wed, 10 Jun 2026 00:00:00 +0800</pubDate>
+      <category>PowerShell</category>
+      <category>效率工具</category>
+      <description>下载文件夹三年没清理是什么体验？写了个 PowerShell 脚本按规则自动归类文件，重点是 Dry Run：先给你看它打算怎么动你的文件，确认了才动手。</description>
+    </item>
+  </channel>
+</rss>
