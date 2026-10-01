@@ -3,12 +3,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://liuli-meng.github.io/</loc>
-    <lastmod>2026-09-06</lastmod>
+    <lastmod>2026-10-01</lastmod>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://liuli-meng.github.io/blog.html</loc>
-    <lastmod>2026-09-06</lastmod>
+    <lastmod>2026-10-01</lastmod>
+  </url>
+  <url>
+    <loc>https://liuli-meng.github.io/post.html?slug=agl-context-pro</loc>
+    <lastmod>2026-10-01</lastmod>
   </url>
   <url>
     <loc>https://liuli-meng.github.io/post.html?slug=kpl-manager-dev-log</loc>

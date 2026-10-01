@@ -4,6 +4,37 @@
 // 现在放的是示例文章（对应 GitHub 上的真实项目），替换成你自己写的内容即可。
 window.POSTS = [
   {
+    slug: 'agl-context-pro',
+    title: '给 Antigravity 装个"油表"：上下文用量三重监控',
+    date: '2026-10-01',
+    tags: ['JavaScript', 'IDE 扩展'],
+    excerpt: '对话聊着聊着被压缩了才发现前面的内容"变糊"？写了个状态栏扩展把预算、对话、官方额度三路数据一起盯上：从本机 language_server 的命令行里抠 token、反查端口、逆向 RPC，零 npm 依赖，热查询 20ms。',
+    content: `
+      <p>用 Antigravity（Google 那个 agentic IDE）干活很舒服，但上下文用量是个黑盒：聊着聊着它悄悄压缩了会话，你只觉得 AI 突然"失忆"了；Rules 和 Skills 每次请求注入多少预算，更是完全看不到。正好练手，写了个状态栏扩展 <code>agl-context-pro</code>，把三路数据一起盯上。</p>
+      <h2>盯哪三路</h2>
+      <ul>
+        <li><strong>预算（Budget）</strong>：自定义内容吃掉多少注入预算，比如 <code>1.7k/20k (8.4%)</code>，还能按 Rules/Skills 逐项拆解；</li>
+        <li><strong>对话（Conversation）</strong>：当前 cascade 会话实际消耗的 token，比如 <code>82.1k/256k (32.1%)</code>，发生过压缩会标出来；</li>
+        <li><strong>官方额度（Quota）</strong>：服务端视角的剩余配额，和云端页面同源，逐模型显示剩余百分比和重置时间。</li>
+      </ul>
+      <p>三者的关系想明白就好理解了：预算是<strong>每次请求固定注入的底噪</strong>，对话是<strong>随聊天增长的动态开销</strong>，官方额度是<strong>平台计费视角的余量</strong>。</p>
+      <h2>最有意思的：找到本机 LS</h2>
+      <p>所有数据都来自本机 Antigravity 自带的 language_server，通过它的 Connect-RPC HTTPS 接口直接读。难点是它不写配置文件，地址和凭据全靠现场发现：</p>
+      <pre><code>1. PowerShell CIM 找到所有 language_server.exe
+   → 命令行参数里提取 --csrf_token
+2. netstat -ano 按 PID 反查 LISTENING 端口
+3. 对候选端口探活 RPC —— LS 开 HTTPS/HTTP 两个口，
+   只有 HTTPS 口能完成 TLS 握手，天然筛选</code></pre>
+      <p>整个过程和 IDE 还是桌面版谁启动的无关，热查询一路只要 20ms 左右。数据源里 <code>GetTokenBase</code>（预算）是我自己实测发现的接口，对话那条 trajectory RPC 的用法和压缩检测阈值则逆向自 GitHub 上的先驱项目——站在巨人肩膀上，致谢都写进 README 了。</p>
+      <h2>压缩是怎么被发现的</h2>
+      <p>拿会话的 trajectory steps，看相邻两个 CHECKPOINT 的 input token：<strong>骤降超过 5000 就判定发生过压缩</strong>。启发式，但实测够用——毕竟正常对话里 input 不会莫名其妙掉一截。</p>
+      <h2>没 Antigravity 也能跑测试</h2>
+      <p>测试不想依赖真机，就手写了 <code>mock-ls.js</code>：自签证书起一个模拟 LS，实现 4 个 RPC 方法返回固定数据（特意包含压缩、截断场景），断言解析到展示的全链路。打包也没用 vsce，一个 Python zipfile 手搓 VSIX。零 npm 依赖、无编译步骤，<code>node --check</code> 过了就能发版。</p>
+      <blockquote>经验：逆向本地服务的第一步不是抓包，是翻进程命令行——很多秘密就明晃晃躺在 argv 里。</blockquote>
+      <p>目前是 Windows 专用实现（PowerShell CIM + netstat），Linux/macOS 没适配，欢迎 PR。扩展从 Releases 下 <code>.vsix</code>，装完重启 IDE，状态栏就有"油表"了。</p>
+    `
+  },
+  {
     slug: 'kpl-manager-dev-log',
     title: '从零写一个 KPL 俱乐部经营小游戏',
     date: '2026-08-20',

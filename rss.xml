@@ -12,6 +12,16 @@
     <atom:link href="https://liuli-meng.github.io/rss.xml" rel="self" type="application/rss+xml"/>
 
     <item>
+      <title>给 Antigravity 装个"油表"：上下文用量三重监控</title>
+      <link>https://liuli-meng.github.io/post.html?slug=agl-context-pro</link>
+      <guid isPermaLink="true">https://liuli-meng.github.io/post.html?slug=agl-context-pro</guid>
+      <pubDate>Thu, 01 Oct 2026 00:00:00 +0800</pubDate>
+      <category>JavaScript</category>
+      <category>IDE 扩展</category>
+      <description>对话聊着聊着被压缩了才发现前面的内容"变糊"？写了个状态栏扩展把预算、对话、官方额度三路数据一起盯上：从本机 language_server 的命令行里抠 token、反查端口、逆向 RPC，零 npm 依赖，热查询 20ms。</description>
+    </item>
+
+    <item>
       <title>从零写一个 KPL 俱乐部经营小游戏</title>
       <link>https://liuli-meng.github.io/post.html?slug=kpl-manager-dev-log</link>
       <guid isPermaLink="true">https://liuli-meng.github.io/post.html?slug=kpl-manager-dev-log</guid>
