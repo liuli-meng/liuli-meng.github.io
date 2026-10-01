@@ -19,13 +19,16 @@ const LANG_COLORS = {
 
 // GitHub 数据缓存：网页在无网络/受限环境下拉取失败时用它渲染，保证始终显示真实项目
 //（部署上线后正常联网会自动拉取最新数据，此缓存仅作兜底，可定期手动更新）
+// 2026-10-01 手动刷新：与 GitHub API 返回顺序一致（按 star 降序，star 相同按最近更新）
 const REPO_FALLBACK = [
-  { name: 'kpl-manager', lang: 'HTML', desc: '王者电竞经理 · KPL 篇——KPL 俱乐部经营同人游戏：转会谈判 / 训练青训 / 官方两段式 BP / 联赛征程，单文件 HTML 双击即玩（非官方同人作品）', stars: 0, forks: 0, url: 'https://github.com/liuli-meng/kpl-manager' },
   { name: 'doudizhu-ai', lang: 'Python', desc: '基于 DouZero 的斗地主 AI（Apache-2.0，参考 kwai/DouZero）', stars: 1, forks: 0, url: 'https://github.com/liuli-meng/doudizhu-ai' },
   { name: 'FileOrganizer', lang: 'PowerShell', desc: 'C 盘文件自动整理工具（PowerShell）：按规则归类文件，支持 Dry Run 预览，整理 C 盘更安心', stars: 1, forks: 0, url: 'https://github.com/liuli-meng/FileOrganizer' },
-  { name: 'github-apk-to-phone', lang: 'Shell', desc: 'WorkBuddy 技能：从 GitHub Releases 下载 APK 并通过 adb 推送到安卓手机', stars: 1, forks: 0, url: 'https://github.com/liuli-meng/github-apk-to-phone' }
+  { name: 'github-apk-to-phone', lang: '', desc: 'WorkBuddy skill: download APK from GitHub Releases and push to Android phone via adb', stars: 1, forks: 0, url: 'https://github.com/liuli-meng/github-apk-to-phone' },
+  { name: 'agl-context-pro', lang: 'JavaScript', desc: 'Antigravity IDE context monitor: budget (Rules/Skills) + conversation tokens + official quota, zero-dependency VSIX extension', stars: 0, forks: 0, url: 'https://github.com/liuli-meng/agl-context-pro' },
+  { name: 'kpl-manager', lang: 'JavaScript', desc: '王者电竞经理 · KPL 篇 —— KPL 俱乐部经营同人游戏：转会谈判 / 训练青训 / 官方两段式 BP / 联赛征程，单文件 HTML 双击即玩（非官方同人作品）', stars: 0, forks: 0, url: 'https://github.com/liuli-meng/kpl-manager' },
+  { name: 'liuli-meng.github.io', lang: 'JavaScript', desc: 'liuli personal site', stars: 0, forks: 0, url: 'https://github.com/liuli-meng/liuli-meng.github.io' }
 ];
-const STATS_FALLBACK = { repos: 4, followers: 0, stars: 3, contrib: '—' };
+const STATS_FALLBACK = { repos: 6, followers: 0, stars: 3, contrib: 188 };
 
 // 没填 githubUser 时展示的占位项目（直接改这里就行）
 const PLACEHOLDER_REPOS = [
